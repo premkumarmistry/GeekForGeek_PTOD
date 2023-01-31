@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    int minRepeats(string A, string B) {
+        // code here
+        int ans =1; 
+        string a=A ;
+        while(1)
+        {
+            if(A.length()>2*B.length())
+            break ;
+            if(A.find(B)!=string::npos || A==B)
+            {
+                return ans; 
+            }
+            A+=a ;
+            ans++; 
+        }
+        
+        return -1 ;
+    }
+};
