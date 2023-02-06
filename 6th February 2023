@@ -1,0 +1,64 @@
+class Solution{
+public:
+    Node* search(Node* root,int target)
+
+    {
+
+        if(!root || root->data==target) return root;
+
+        else if(root->data<target)
+
+        {
+
+            return search(root->right,target);
+
+        }
+
+        else return search(root->left,target);
+
+    }
+
+// for getting vertical traversal
+
+    void vertical_order(Node* root, int idx,map<int,vector<int>>&m)
+
+    {
+
+        if(root)
+
+        {
+
+            m[idx].push_back(root->data);
+
+            vertical_order(root->left,idx-1,m);
+
+            vertical_order(root->right,idx+1,m);
+
+        }
+
+    }
+
+    long long int verticallyDownBST(Node *root,int target){
+
+        Node* found=search(root,target);
+
+        if(found==NULL) return -1;
+
+        map<int,vector<int>> m;
+
+        vertical_order(found,0,m);
+
+         long long ans=0;
+
+         for(int i=1;i<m[0].size();i++)
+
+         {
+
+             ans+=m[0][i];
+
+         }
+
+        return ans; 
+
+    }
+};
