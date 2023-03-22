@@ -1,0 +1,38 @@
+class Solution{
+public:
+int x=0;int y=0,flag=-1;
+
+int f1(Node *root){    //to find min sum path from target to leaf node
+    if(!root->left and !root->right)return root->data;
+    if(root->left and !root->right)return root->data+f1(root->left);
+    if(!root->left and root->right)return root->data+f1(root->right);
+    return root->data+min(f1(root->left),f1(root->right));
+}
+
+void f(Node *root,int target){  //to find the sum of path from root to                                                       //target node(one such path exists)
+
+
+    if(!root)return ;
+    if(root->data==target){
+        flag=1;
+        y=f1(root);
+        return;
+    }
+    if(root->data<target){
+        x+=root->data;
+        f(root->right,target);
+    }
+    else {
+        x+=root->data;
+        f(root->left,target);
+    }
+}
+    int maxDifferenceBST(Node *root,int target){
+        // Code here
+        
+        f(root,target);
+        if(flag==-1)return -1;
+       
+        return x-y+target;
+    }
+};
