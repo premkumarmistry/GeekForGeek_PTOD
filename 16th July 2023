@@ -1,0 +1,21 @@
+class Solution
+{
+    public:
+    void solve(queue<int> &q,int i)
+    {
+        if(i==0) return ;
+        
+        int t=q.front();
+        q.pop();
+        solve(q,i-1);
+        q.push(t);
+    }
+    queue<int> rev(queue<int> q)
+    {
+        // add code here.
+        int n=q.size();
+        solve(q,n);
+        return q;
+       
+    }
+};
